@@ -25,15 +25,31 @@ console.log(pizza4);
 
 const crustTypeSelection = ["deep dish", "hand tossed", "plain", "whole wheat"];
 const sauceTypeSelection = ["traditional", "marinara", "vinegar", "wine"];
-const cheesesSelection = ["mozzarella", "feta", "swiss"];
-const toppingSelection = ["pepperoni", "sausage", "durian", "ovlive", "extra cheese", "steak"];
+const cheesesSelection = ["mozzarella", "feta", "swiss", "blue cheese", "vegan cheese"];
+const toppingSelection = ["pepperoni", "sausage", "durian", "olive", "extra cheese", "steak"];
+
+function pickRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function multipleRandomPick(arr, selection) {
+    for (let i = 0; i < selection.length; i++) {
+        if (Math.random() <= 0.5) {
+            arr.push(selection[i]);
+        }
+    }
+}
+
 
 function randomPizza() {
     let randomPizza = {};
-    randomPizza.crustType = crustTypeSelection[Math.floor(Math.random() * crustTypeSelection.length)];
-    randomPizza.sauceType = sauceTypeSelection[Math.floor(Math.random() * sauceTypeSelection.length)];
-    randomPizza.cheeses = cheesesSelection[Math.floor(Math.random() * cheesesSelection.length)];
-    randomPizza.toppings = toppingSelection[Math.floor(Math.random() * toppingSelection.length)];
+    randomPizza.crustType = pickRandom(crustTypeSelection);
+    randomPizza.sauceType = pickRandom(sauceTypeSelection);
+    randomPizza.cheeses = [];
+    multipleRandomPick(randomPizza.cheeses, cheesesSelection);
+    randomPizza.toppings = [];
+    multipleRandomPick(randomPizza.toppings, toppingSelection);
+
 
     return randomPizza;
 }
